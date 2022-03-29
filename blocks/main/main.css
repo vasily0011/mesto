@@ -1,0 +1,10 @@
+/* .main {
+
+} */
+
+@media screen and (max-width: 320px) {
+    .main {
+        max-width: 282px;
+    }
+    
+}
