@@ -1,21 +1,22 @@
-const editButtonProfile = document.querySelector(".profile__edit-button");
-const modalWindow = document.querySelector(".popup");
-const modalCloseButton = modalWindow.querySelector(".popup__close");
+const editButtonProfile = document.querySelector('.profile__edit-button');
+const modalWindow = document.querySelector('.popup');
+const modalCloseButton = modalWindow.querySelector('.popup__close');
 
 function toggleModalWindow() {
-  modalWindow.classList.toggle("popup_is-active");
+  modalWindow.classList.toggle('popup_is-active');
+  nameImput.value = profileTitle.textContent;
+  jobImput.value = profileSubtitle.textContent;
 }
 
-editButtonProfile.addEventListener("click", toggleModalWindow);
+editButtonProfile.addEventListener('click', toggleModalWindow);
 
-modalCloseButton.addEventListener("click", toggleModalWindow);
+modalCloseButton.addEventListener('click', toggleModalWindow);
 
-let formElement = modalWindow.querySelector(".popup__form");
-let profileTitle = document.querySelector(".profile__title");
-let profileSubtitle = document.querySelector(".profile__subtitle");
-let nameImput = document.querySelector(".popup__form-name");
-let jobImput = document.querySelector(".popup__form-job");
-let saveForm = document.querySelector(".popup__form-save");
+let formElement = modalWindow.querySelector('.popup__form');
+let profileTitle = document.querySelector('.profile__title');
+let profileSubtitle = document.querySelector('.profile__subtitle');
+let nameImput = document.querySelector('.popup__input_name');
+let jobImput = document.querySelector('.popup__input_job');
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
@@ -24,4 +25,4 @@ function formSubmitHandler(evt) {
   toggleModalWindow();
 }
 
-formElement.addEventListener("submit", formSubmitHandler);
+formElement.addEventListener('submit', formSubmitHandler);
