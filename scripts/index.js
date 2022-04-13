@@ -1,22 +1,33 @@
 const editButtonProfile = document.querySelector(".profile__edit-button");
-const modalWindow = document.querySelector(".popup");
-const modalCloseButton = modalWindow.querySelector(".popup__close");
+const modalWindowProfile = document.querySelector(".popup__edit_profile");
+const modalProfileCloseButton = modalWindowProfile.querySelector(".popup__close");
+const addCardButton = document.querySelector(".profile__add-button");
+const modalWindowAddCard = document.querySelector(".popup__add_card");
+const modalAddCardCloseButton = modalWindowAddCard.querySelector(".popup__close");
 
-function toggleModalWindow() {
-  if (modalWindow.classList.contains("popup_is-active")) {
-    modalWindow.classList.toggle("popup_is-active");
+function toggleModalWindowAddCard() {
+  modalWindowAddCard.classList.toggle("popup_is-active");
+}
+
+function toggleModalWindowProfile() {
+  if (modalWindowProfile.classList.contains("popup_is-active")) {
+    modalWindowProfile.classList.toggle("popup_is-active");
   } else {
-    modalWindow.classList.toggle("popup_is-active");
+    modalWindowProfile.classList.toggle("popup_is-active");
     nameImput.value = profileTitle.textContent;
     jobImput.value = profileSubtitle.textContent;
   }
 }
 
-editButtonProfile.addEventListener("click", toggleModalWindow);
+editButtonProfile.addEventListener("click", toggleModalWindowProfile);
 
-modalCloseButton.addEventListener("click", toggleModalWindow);
+modalProfileCloseButton.addEventListener("click", toggleModalWindowProfile);
 
-let formElement = modalWindow.querySelector(".popup__form");
+addCardButton.addEventListener("click", toggleModalWindowAddCard);
+
+modalAddCardCloseButton.addEventListener("click", toggleModalWindowAddCard);
+
+let formElement = modalWindowProfile.querySelector(".popup__form");
 let profileTitle = document.querySelector(".profile__title");
 let profileSubtitle = document.querySelector(".profile__subtitle");
 let nameImput = document.querySelector(".popup__input_type_name");
@@ -26,7 +37,7 @@ function formSubmitHandler(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameImput.value;
   profileSubtitle.textContent = jobImput.value;
-  toggleModalWindow();
+  toggleModalWindowProfile();
 }
 
 formElement.addEventListener("submit", formSubmitHandler);

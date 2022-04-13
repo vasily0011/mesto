@@ -26,6 +26,7 @@
     <section class="cards">
       <ul class="elements">
         <li class="element">
+          <button aria-label="удалить карточку" class="element__button_delete" type="button"></button>
           <img src="./images/karachaevsk.png" alt="картинка карточки" class="element__image" />
           <div class="element__item">
             <h2 class="element__title">Карачаевск</h2>
@@ -33,6 +34,7 @@
           </div>
         </li>
         <li class="element">
+          <button aria-label="удалить карточку" class="element__button_delete" type="button"></button>
           <img src="./images/elbrus_maunt.png" alt="картинка карточки" class="element__image" />
           <div class="element__item">
             <h2 class="element__title">Гора Эльбрус</h2>
@@ -40,6 +42,7 @@
           </div>
           </li>
         <li class="element">
+          <button aria-label="удалить карточку" class="element__button_delete" type="button"></button>
           <img src="./images/dombai.png" alt="картинка карточки" class="element__image" />
           <div class="element__item">
             <h2 class="element__title">Домбай</h2>
@@ -47,6 +50,7 @@
           </div>
         </li>
         <li class="element">
+          <button aria-label="удалить карточку" class="element__button_delete" type="button"></button>
           <img src="./images/elbrus_maunt.png" alt="картинка карточки" class="element__image" />
           <div class="element__item">
             <h2 class="element__title">Гора Эльбрус</h2>
@@ -54,6 +58,7 @@
           </div>
         </li>
         <li class="element">
+          <button aria-label="удалить карточку" class="element__button_delete" type="button"></button>
           <img src="./images/dombai.png" alt="картинка карточки" class="element__image" />
           <div class="element__item">
             <h2 class="element__title">Домбай</h2>
@@ -61,6 +66,7 @@
           </div>
         </li>
         <li class="element">
+          <button aria-label="удалить карточку" class="element__button_delete" type="button"></button>
           <img src="./images/karachaevsk.png" alt="картинка карточки" class="element__image" />
           <div class="element__item">
             <h2 class="element__title">Карачаево-Черкесия</h2>
@@ -73,7 +79,7 @@
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
   </main>
-  <div class="popup">
+  <div class="popup popup__edit_profile">
     <div class="popup__container">
       <button aria-label="Закрыть" class="popup__close" type="button"></button>
       <form name="form_edit_profile" class="popup__form">
@@ -81,6 +87,17 @@
         <input type="text" name="popup__input_name" class="popup__input popup__input_type_name" placeholder="Жак-Ив Кусто" />
         <input type="text" name="popup__input_job" class="popup__input popup__input_type_job" placeholder="Исследователь океана" />
         <button class="popup__form-save" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup__add_card">
+    <div class="popup__container">
+      <button aria-label="Закрыть" class="popup__close" type="button"></button>
+      <form name="form_edit_profile" class="popup__form">
+        <h3 class="popup__title">Новое место</h3>
+        <input type="text" name="popup__input_name" class="popup__input popup__input_type_name" placeholder="Название" />
+        <input type="text" name="popup__input_job" class="popup__input popup__input_type_job" placeholder="Ссылка на картинку" />
+        <button class="popup__form-save" type="submit">Создать</button>
       </form>
     </div>
   </div>
