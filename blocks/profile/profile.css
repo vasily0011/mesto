@@ -7,7 +7,12 @@
   align-items: center;
 }
 
-
+@media screen and (max-width: 900px) {
+  .profile {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
 
 @media screen and (max-width: 650px) {
   .profile {
@@ -15,8 +20,3 @@
   }  
 }
 
-/* @media screen and (max-width: 650px) {
-  .profile {
-    max-width: 282px;
-  }
-} */
