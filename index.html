@@ -96,11 +96,21 @@
       <button aria-label="Закрыть" class="popup__close" type="button"></button>
       <form name="form_edit_profile" class="popup__form">
         <h3 class="popup__title">Новое место</h3>
-        <input type="text" name="popup__input_name" class="popup__input popup__input_type_name" placeholder="Название" />
-        <input type="text" name="popup__input_job" class="popup__input popup__input_type_job" placeholder="Ссылка на картинку" />
+        <input type="text" name="popup__input_title" class="popup__input popup__input_type_title" placeholder="Название" />
+        <input type="url" name="popup__link" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" />
         <button class="popup__form-save" type="submit">Создать</button>
       </form>
     </div>
+  </div>
+  <div class="popup popup__card-image">
+    <div class="popup__container_image">
+      <button aria-label="Закрыть" class="popup__close" type="button"></button>
+      <figure class="popup__opened_card">
+        <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" alt="" class="popup__image">
+        <figcaption class="popup__text">Камчатка</figcaption>
+      </figure>
+    </div>
+    
   </div>
   <template class="template">
     <li class="element">

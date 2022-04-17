@@ -27,20 +27,79 @@ const initialCards = [
 
 const listCard = document.querySelector(".elements");
 const template = document.querySelector(".template");
+const modalWindowAddCard = document.querySelector(".popup__add_card");
+
+const popupFormSaveButton =
+  modalWindowAddCard.querySelector(".popup__form-save");
+const modalAddCardCloseButton =
+  modalWindowAddCard.querySelector(".popup__close");
+const inputTitleAddCard = modalWindowAddCard.querySelector(
+  ".popup__input_type_title"
+);
+const inputLinkAddCard = modalWindowAddCard.querySelector(
+  ".popup__input_type_link"
+);
+const modalWindowImage = document.querySelector(".popup__card-image");
+const modalImageCloseButton = modalWindowImage.querySelector(".popup__close");
+const popupImage = modalWindowImage.querySelector(".popup__image");
+const popupText = modalWindowImage.querySelector(".popup__text");
 
 function render() {
   const html = initialCards.map(getElement);
   listCard.append(...html);
 }
 
+function togglemodalWindowImage() {
+  modalWindowImage.classList.toggle("popup_is-active");
+}
+
 function getElement(item) {
   const getElementTemplate = template.content.cloneNode(true);
   const nameCard = getElementTemplate.querySelector(".element__title");
   const imageCard = getElementTemplate.querySelector(".element__image");
+  const removeButton = getElementTemplate.querySelector(
+    ".element__button_delete"
+  );
+  const likeButton = getElementTemplate.querySelector(".element__button");
+
   nameCard.textContent = item.name;
   imageCard.src = item.link;
   imageCard.alt = item.name;
+
+  removeButton.addEventListener("click", handleremoveElement);
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("element__button_active");
+  });
+    imageCard.addEventListener("click",  function() {
+      popupImage.src = imageCard.src;
+      popupText.textContent = nameCard.textContent;
+      togglemodalWindowImage();
+
+      modalImageCloseButton.addEventListener("click", togglemodalWindowImage);
+
+    });
+
+
   return getElementTemplate;
+}
+
+
+function handleremoveElement(evt) {
+  const element = evt.target.closest(".element");
+  element.remove();
+}
+
+function handleAddCard(evt) {
+  evt.preventDefault();
+  const newCard = getElement({
+    name: inputTitleAddCard.value,
+    link: inputLinkAddCard.value,
+  });
+  toggleModalWindowAddCard();
+  inputTitleAddCard.value = "";
+  inputLinkAddCard.value = "";
+  listCard.prepend(newCard);
 }
 
 render();
@@ -50,13 +109,13 @@ const modalWindowProfile = document.querySelector(".popup__edit_profile");
 const modalProfileCloseButton =
   modalWindowProfile.querySelector(".popup__close");
 const addCardButton = document.querySelector(".profile__add-button");
-const modalWindowAddCard = document.querySelector(".popup__add_card");
-const modalAddCardCloseButton =
-  modalWindowAddCard.querySelector(".popup__close");
+
 
 function toggleModalWindowAddCard() {
   modalWindowAddCard.classList.toggle("popup_is-active");
 }
+
+popupFormSaveButton.addEventListener("click", handleAddCard);
 
 function toggleModalWindowProfile() {
   if (modalWindowProfile.classList.contains("popup_is-active")) {
