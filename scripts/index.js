@@ -27,7 +27,7 @@ const initialCards = [
 
 const listCard = document.querySelector(".elements");
 const template = document.querySelector(".template");
-const modalWindowAddCard = document.querySelector(".popup__add");
+const modalWindowAddCard = document.querySelector(".popup_add-Card");
 
 const popupFormSaveButton =
   modalWindowAddCard.querySelector(".popup__form-save");
@@ -39,7 +39,7 @@ const inputTitleAddCard = modalWindowAddCard.querySelector(
 const inputLinkAddCard = modalWindowAddCard.querySelector(
   ".popup__input_type_link"
 );
-const modalWindowImage = document.querySelector(".popup__card");
+const modalWindowImage = document.querySelector(".popup_card");
 const modalImageCloseButton = modalWindowImage.querySelector(".popup__close");
 const popupImage = modalWindowImage.querySelector(".popup__image");
 const popupText = modalWindowImage.querySelector(".popup__text");
@@ -105,7 +105,7 @@ function handleAddCard(evt) {
 render();
 
 const editButtonProfile = document.querySelector(".profile__edit-button");
-const modalWindowProfile = document.querySelector(".popup__edit");
+const modalWindowProfile = document.querySelector(".popup_edit-profile");
 const modalProfileCloseButton =
   modalWindowProfile.querySelector(".popup__close");
 const addCardButton = document.querySelector(".profile__add-button");
