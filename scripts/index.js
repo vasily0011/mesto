@@ -81,7 +81,7 @@ function getElementCard(item) {
   imageCard.src = item.link;
   imageCard.alt = item.name;
 
-  removeButton.addEventListener("click", handleremoveElement);
+  removeButton.addEventListener("click", handleRemoveElement);
 
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("element__button_active");
@@ -97,7 +97,7 @@ function getElementCard(item) {
   return ElementTemplate;
 }
 
-function handleremoveElement(evt) {
+function handleRemoveElement(evt) {
   const element = evt.target.closest(".element");
   element.remove();
 }
@@ -141,9 +141,9 @@ popupFormSaveButton.addEventListener("click", handleAddCard);
 // }
 
 editButtonProfile.addEventListener("click", function () {
-  openPopup(modalWindowProfile);
   nameImput.value = profileTitle.textContent;
   jobImput.value = profileSubtitle.textContent;
+  openPopup(modalWindowProfile);
 });
 
 modalProfileCloseButton.addEventListener("click", function () {
