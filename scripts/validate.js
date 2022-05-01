@@ -50,25 +50,25 @@ const config = {
   errorClass: '.popup__error'
 };
 
-const showInputError = (formElement, inputElement, inputErrorClass, errorClass) => {
+const showInputError = (config, formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(inputErrorClass);
-  errorElement.classList.add(errorClass);
+  inputElement.classList.add(config.inputErrorClass);
+  errorElement.classList.add(config.errorClass);
   errorElement.textContent = inputElement.validationMessage;
 };
 
-const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) => {
+const hideInputError = (config, formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(inputErrorClass);
-  errorElement.classList.remove(errorClass);
+  inputElement.classList.remove(config.inputErrorClass);
+  errorElement.classList.remove(config.errorClass);
   errorElement.textContent = '';
 };
 
-const checkInputValidity = function (config, formElement, inputElement) {
+const checkInputValidity = (config, formElement, inputElement) => {
   if(!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, config.inputErrorClass, config.errorClass);
+    showInputError(config, formElement, inputElement);
   } else {
-    hideInputError(formElement, inputElement, config.inputErrorClass, config.errorClass);
+    hideInputError(config, formElement, inputElement);
   }
 };
 
@@ -78,12 +78,12 @@ const hasInvalidInput = (inputs) => {
   });
 };
 
-const disableSubmitButton = function (buttonElement, DisabledButtonClass) {
+const disableSubmitButton = (buttonElement, DisabledButtonClass) => {
   buttonElement.classList.add(DisabledButtonClass);
   buttonElement.setAttribute('disabled','');
 };
 
-const toggleButtonState = function (inputs, buttonElement, DisabledButtonClass) {
+const toggleButtonState = (inputs, buttonElement, DisabledButtonClass) => {
   if(hasInvalidInput(inputs)) {
     disableSubmitButton(buttonElement, DisabledButtonClass);
   } else {
@@ -111,11 +111,11 @@ const enableValidation = (config) => {
   });
 };
 
-const deleteErrors = function (config, modalWindow) {
-// const formElement = modalWindow.querySelector(config.formSelector);
-const inputs = Array.from(modalWindow.querySelectorAll(object.inputSelector));
+const clearErrors = (config, popup) => {
+const formElement = popup.querySelector(config.formSelector);
+const inputs = Array.from(popup.querySelectorAll(config.inputSelector));
   inputs.forEach((inputElement) => {
-    hideInputError(formElement, inputElement, inputErrorClass, errorClass);
+    hideInputError(config, formElement, inputElement);
   });
  };
 

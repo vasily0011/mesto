@@ -1,6 +1,6 @@
-/* .main {
-
-} */
+.main {
+min-height: 100vh;
+}
 
 @media screen and (max-width: 320px) {
     .main {

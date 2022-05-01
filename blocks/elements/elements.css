@@ -6,6 +6,7 @@
   margin: 51px auto 0;
   max-width: 880px;
   list-style-type: none;
+  min-height: 50vh;
 }
 
 @media screen and (max-width: 320px) {
