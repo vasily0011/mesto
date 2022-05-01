@@ -135,11 +135,11 @@ addCardButton.addEventListener("click", toggleModalWindowAddCard);
 
 modalAddCardCloseButton.addEventListener("click", toggleModalWindowAddCard);
 
-let formElement = modalWindowProfile.querySelector(".popup__form");
-let profileTitle = document.querySelector(".profile__title");
-let profileSubtitle = document.querySelector(".profile__subtitle");
-let nameImput = document.querySelector(".popup__input_type_name");
-let jobImput = document.querySelector(".popup__input_type_job");
+const formsElement = modalWindowProfile.querySelector(".popup__form");
+const profileTitle = document.querySelector(".profile__title");
+const profileSubtitle = document.querySelector(".profile__subtitle");
+const nameImput = document.querySelector(".popup__input_type_name");
+const jobImput = document.querySelector(".popup__input_type_job");
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
@@ -148,4 +148,4 @@ function formSubmitHandler(evt) {
   toggleModalWindowProfile();
 }
 
-formElement.addEventListener("submit", formSubmitHandler);
+formsElement.addEventListener("submit", formSubmitHandler);
