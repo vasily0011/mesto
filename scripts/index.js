@@ -85,6 +85,7 @@ function handleAddCard(evt) {
     link: inputLinkAddCard.value,
   });
   formElementAddCard.reset();
+  disabledButton(popupFormSaveButton, config.disabledButtonClass);
   listCards.prepend(newCard);
   closePopup(modalWindowAddCard);
 }
@@ -129,7 +130,6 @@ modalProfileCloseButton.addEventListener("click", function () {
 
 addCardButton.addEventListener("click", function () {
   openPopup(modalWindowAddCard);
-  disabledButton(popupFormSaveButton, config.disabledButtonClass);
   clearErrors(config, modalWindowAddCard);
 });
 
