@@ -22,8 +22,4 @@
   .popup__input {
     max-width: 238px;
   }
-
-  .popup__input:first-of-type {
-    margin-top: 75px;
-  }
 }
