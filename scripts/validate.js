@@ -1,51 +1,8 @@
-// function EnableValidation(config) {
-//   const form = document.querySelector(config.formSelector);
-//   const inputs = form.querySelectorAll(config.inputSelector);
-
-//   inputs.forEach((element) => {
-//     element.addEventListener("input", (event) =>
-//       handleFormInput(event, form, config)
-//     );
-//   });
-
-//   form.addEventListener("submit", (event) => handleFormSubmit(event, form));
-
-//   toggleButton(form, config);
-// }
-
-// function toggleButton(form, config) {
-//   const button = document.querySelector(config.buttonSelector);
-//   button.disabled = !form.checkValidity();
-//   button.classList.toggle("popup__form-save_disabled", !form.checkValidity());
-// }
-
-// function handleFormSubmit(event, form) {
-//   event.preventDefault();
-// }
-
-// function handleFormInput(event, form, config) {
-//   const input = event.target;
-//   const errorNode = document.querySelector(`#${input.id}-error`);
-
-//   if (input.validity.valid) {
-//     errorNode.textContent = "";
-//   } else {
-//     errorNode.textContent = input.validationMessage;
-//   }
-//   toggleButton(form, config);
-// }
-
-// EnableValidation({
-//   formSelector: ".popup__form",
-//   inputSelector: ".popup__input",
-//   buttonSelector: ".popup__form-save",
-// });
-
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   buttonSelector: '.popup__form-save',
-  DisabledButtonClass: 'popup__form-save_disabled',
+  disabledButtonClass: 'popup__form-save_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: '.popup__error'
 };
@@ -78,12 +35,16 @@ const hasInvalidInput = (inputs) => {
   });
 };
 
-const toggleButtonState = (inputs, buttonElement, DisabledButtonClass) => {
+const disabledButton = (buttonElement, disabledButtonClass) => {
+  buttonElement.classList.add(disabledButtonClass);
+  buttonElement.setAttribute('disabled', '');
+}
+
+const toggleButtonState = (inputs, buttonElement, disabledButtonClass) => {
   if(hasInvalidInput(inputs)) {
-    buttonElement.classList.add(DisabledButtonClass);
-    buttonElement.setAttribute('disabled','');
+    disabledButton(buttonElement, disabledButtonClass);
   } else {
-    buttonElement.classList.remove(DisabledButtonClass);
+    buttonElement.classList.remove(disabledButtonClass);
     buttonElement.removeAttribute('disabled'); 
   }
 };
@@ -91,11 +52,11 @@ const toggleButtonState = (inputs, buttonElement, DisabledButtonClass) => {
 const setEventListeners = (config, formElement) => {
   const inputs = Array.from(formElement.querySelectorAll(`${config.inputSelector}`));
   const buttonElement = formElement.querySelector(config.buttonSelector);
-  toggleButtonState(inputs, buttonElement, config.DisabledButtonClass);
+  toggleButtonState(inputs, buttonElement, config.disabledButtonClass);
   inputs.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       checkInputValidity(config, formElement, inputElement);
-      toggleButtonState(inputs, buttonElement, config.DisabledButtonClass);
+      toggleButtonState(inputs, buttonElement, config.disabledButtonClass);
     });
   });
 };

@@ -5,4 +5,9 @@
     font-size: 12px;
     line-height: 121%;
     color: #ff0000;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: calc(100% + 5px);
+    min-height: 30px;
 }

@@ -1,0 +1,12 @@
+.popup__input_container {
+    width: 100%;
+    max-width: 358px;
+    position: relative;
+    display: flex;
+}
+
+@media screen and (max-width: 530px) {
+    .popup__input_container {
+      max-width: 238px;
+    }
+}

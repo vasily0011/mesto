@@ -1,33 +1,7 @@
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
 const listCards = document.querySelector(".elements");
 const template = document.querySelector(".template");
 const modalWindowAddCard = document.querySelector(".popup_add-Card");
+const formElementAddCard = modalWindowAddCard.querySelector('.popup__form');
 const popupFormSaveButton =
   modalWindowAddCard.querySelector(".popup__form-save");
 const modalAddCardCloseButton =
@@ -47,20 +21,19 @@ const modalWindowProfile = document.querySelector(".popup_edit-profile");
 const modalProfileCloseButton =
   modalWindowProfile.querySelector(".popup__close");
 const addCardButton = document.querySelector(".profile__add-button");
-const formElement = document.querySelector(".popup__form");
+const formElementEditProfile = modalWindowProfile.querySelector(".popup__form");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 const nameImput = document.querySelector(".popup__input_type_name");
 const jobImput = document.querySelector(".popup__input_type_job");
 
 function render() {
-  const html = initialCards.map(getElementCard);
-  listCards.append(...html);
+  const cards = initialCards.map(getElementCard);
+  listCards.append(...cards);
 }
 
 function openPopup(popup) {
   popup.classList.add("popup_is-active");
-  clearErrors(config, popup);
   document.addEventListener('keydown', closeOnEsc);
   document.addEventListener('click', closeClickOnOverlay);
 }
@@ -71,16 +44,21 @@ function closePopup(popup) {
   document.removeEventListener('click', closeClickOnOverlay);
 }
 
-// function togglemodalWindowImage() {
-//   modalWindowImage.classList.toggle("popup_is-active");
-// }
-
 function getElementCard(item) {
-  const ElementTemplate = template.content.cloneNode(true);
-  const nameCard = ElementTemplate.querySelector(".element__title");
-  const imageCard = ElementTemplate.querySelector(".element__image");
-  const removeButton = ElementTemplate.querySelector(".element__button_delete");
-  const likeButton = ElementTemplate.querySelector(".element__button");
+  const elementTemplate = template.content.cloneNode(true);
+  const nameCard = elementTemplate.querySelector(".element__title");
+  const imageCard = elementTemplate.querySelector(".element__image");
+  const removeButton = elementTemplate.querySelector(".element__button_delete");
+  const likeButton = elementTemplate.querySelector(".element__button");
+  const likeCard = () => {
+    likeButton.classList.toggle("element__button_active");
+  }
+  const openImageCard = () => {
+    popupImage.src = imageCard.src;
+    popupImage.alt = nameCard.textContent;
+    popupText.textContent = nameCard.textContent;
+    openPopup(modalWindowImage);
+  };
 
   nameCard.textContent = item.name;
   imageCard.src = item.link;
@@ -88,18 +66,11 @@ function getElementCard(item) {
 
   removeButton.addEventListener("click", handleRemoveElement);
 
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("element__button_active");
-  });
+  likeButton.addEventListener("click", likeCard);
 
-  imageCard.addEventListener("click", function () {
-    popupImage.src = imageCard.src;
-    popupImage.alt = nameCard.textContent;
-    popupText.textContent = nameCard.textContent;
-    openPopup(modalWindowImage);
-  });
+  imageCard.addEventListener("click", openImageCard);
 
-  return ElementTemplate;
+  return elementTemplate;
 }
 
 function handleRemoveElement(evt) {
@@ -113,8 +84,7 @@ function handleAddCard(evt) {
     name: inputTitleAddCard.value,
     link: inputLinkAddCard.value,
   });
-  inputTitleAddCard.value = "";
-  inputLinkAddCard.value = "";
+  formElementAddCard.reset();
   listCards.prepend(newCard);
   closePopup(modalWindowAddCard);
 }
@@ -138,29 +108,19 @@ function closeClickOnOverlay(event) {
     closePopup(event.target);
   }
 };
-// function toggleModalWindowAddCard() {
-//   modalWindowAddCard.classList.toggle("popup_is-active");
-// }
+
 modalImageCloseButton.addEventListener("click", function () {
   closePopup(modalWindowImage);
 });
 
-popupFormSaveButton.addEventListener("click", handleAddCard);
+formElementAddCard.addEventListener("submit", handleAddCard);
 
-// function toggleModalWindowProfile() {
-//   if (modalWindowProfile.classList.contains("popup_is-active")) {
-//     modalWindowProfile.classList.toggle("popup_is-active");
-//   } else {
-//     modalWindowProfile.classList.toggle("popup_is-active");
-//     nameImput.value = profileTitle.textContent;
-//     jobImput.value = profileSubtitle.textContent;
-//   }
-// }
 
 editButtonProfile.addEventListener("click", function () {
   nameImput.value = profileTitle.textContent;
   jobImput.value = profileSubtitle.textContent;
   openPopup(modalWindowProfile);
+  clearErrors(config, modalWindowProfile);
 });
 
 modalProfileCloseButton.addEventListener("click", function () {
@@ -169,12 +129,14 @@ modalProfileCloseButton.addEventListener("click", function () {
 
 addCardButton.addEventListener("click", function () {
   openPopup(modalWindowAddCard);
+  disabledButton(popupFormSaveButton, config.disabledButtonClass);
+  clearErrors(config, modalWindowAddCard);
 });
 
 modalAddCardCloseButton.addEventListener("click", function () {
   closePopup(modalWindowAddCard);
 });
 
-formElement.addEventListener("submit", submitFormProfile);
+formElementEditProfile.addEventListener("submit", submitFormProfile);
 
 render();

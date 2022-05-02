@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Место Россия</title>
   <link rel="stylesheet" href="./pages/index.css" />
+  <script src="./scripts/cards.js"></script>
   <script defer src="./scripts/index.js"></script>
   
 </head>
@@ -38,6 +39,7 @@
       <button aria-label="Закрыть" class="popup__close" type="button"></button>
       <form name="form_edit_profile" class="popup__form" novalidate>
         <h3 class="popup__title">Редактировать профиль</h3>
+        <div class = "popup__input_container">
         <input 
         type="text" 
         id="name-input"
@@ -49,6 +51,8 @@
         placeholder="Жак-Ив Кусто" 
         >
         <span class="popup__error name-input-error"></span>
+        </div>
+        <div class = "popup__input_container">
         <input 
         type="text" 
         id="job-input"
@@ -60,6 +64,7 @@
         placeholder="Исследователь океана" 
         >
         <span class="popup__error job-input-error"></span>
+        </div>
         <button class="popup__form-save" type="submit">Сохранить</button>
       </form>
     </div>
@@ -69,6 +74,7 @@
       <button aria-label="Закрыть" class="popup__close" type="button"></button>
       <form name="form_edit_profile" class="popup__form" novalidate>
         <h3 class="popup__title">Новое место</h3>
+        <div class = "popup__input_container">
         <input 
         type="text" 
         id="title-input"
@@ -80,6 +86,8 @@
         placeholder="Название" 
         >
         <span class="popup__error title-input-error"></span>
+        </div>
+        <div class = "popup__input_container">
         <input 
         type="url" 
         id="link-input"
@@ -90,6 +98,7 @@
         placeholder="Ссылка на картинку" 
         >
         <span class="popup__error link-input-error"></span>
+        </div>
         <button class="popup__form-save" type="submit">Создать</button>
       </form>
     </div>
