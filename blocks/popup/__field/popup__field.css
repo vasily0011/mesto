@@ -1,4 +1,4 @@
-.popup_input_container {
+.popup__field {
     width: 100%;
     max-width: 358px;
     position: relative;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width: 530px) {
-    .popup_input_container {
+    .popup__field {
       max-width: 238px;
     }
 }
