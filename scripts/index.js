@@ -1,3 +1,10 @@
+import { Card } from './Card.js'
+import { initialCards } from './dataCards.js';
+import { FormValidator } from './FormValidator.js';
+import { config } from '../utils.js';
+
+
+
 const listCards = document.querySelector(".elements");
 const template = document.querySelector(".template");
 const modalWindowAddCard = document.querySelector(".popup_add-Card");
@@ -26,11 +33,10 @@ const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 const nameImput = document.querySelector(".popup__input_type_name");
 const jobImput = document.querySelector(".popup__input_type_job");
-
-function render() {
-  const cards = initialCards.map(getElementCard);
-  listCards.append(...cards);
-}
+const cardFormValidator = new FormValidator(config, formElementAddCard);
+const profileFormValidator = new FormValidator(config, formElementEditProfile);
+cardFormValidator.enableValidation();
+profileFormValidator.enableValidation();
 
 function openPopup(popup) {
   popup.classList.add("popup_is-active");
@@ -44,49 +50,21 @@ function closePopup(popup) {
   document.removeEventListener('click', closeClickOnOverlay);
 }
 
-function getElementCard(item) {
-  const elementTemplate = template.content.cloneNode(true);
-  const nameCard = elementTemplate.querySelector(".element__title");
-  const imageCard = elementTemplate.querySelector(".element__image");
-  const removeButton = elementTemplate.querySelector(".element__button_delete");
-  const likeButton = elementTemplate.querySelector(".element__button");
-  const likeCard = () => {
-    likeButton.classList.toggle("element__button_active");
-  }
-  const openImageCard = () => {
-    popupImage.src = imageCard.src;
-    popupImage.alt = nameCard.textContent;
-    popupText.textContent = nameCard.textContent;
-    openPopup(modalWindowImage);
-  };
 
-  nameCard.textContent = item.name;
-  imageCard.src = item.link;
-  imageCard.alt = item.name;
+function openImageCard(item) {
+  popupImage.src = item.link;
+  popupImage.alt = item.name;
+  popupText.textContent = item.name;
+  openPopup(modalWindowImage);
+};
 
-  removeButton.addEventListener("click", handleRemoveElement);
-
-  likeButton.addEventListener("click", likeCard);
-
-  imageCard.addEventListener("click", openImageCard);
-
-  return elementTemplate;
-}
-
-function handleRemoveElement(evt) {
-  const element = evt.target.closest(".element");
-  element.remove();
-}
 
 function handleAddCard(evt) {
   evt.preventDefault();
-  const newCard = getElementCard({
-    name: inputTitleAddCard.value,
-    link: inputLinkAddCard.value,
-  });
+  const newCard = new Card({ name: inputTitleAddCard.value, link: inputLinkAddCard.value }, '.template', openImageCard);
   formElementAddCard.reset();
-  disabledButton(popupFormSaveButton, config.disabledButtonClass);
-  listCards.prepend(newCard);
+  cardFormValidator.disabledButton(popupFormSaveButton, config.disabledButtonClass);
+  listCards.prepend(newCard.generateCard());
   closePopup(modalWindowAddCard);
 }
 
@@ -121,7 +99,7 @@ editButtonProfile.addEventListener("click", function () {
   nameImput.value = profileTitle.textContent;
   jobImput.value = profileSubtitle.textContent;
   openPopup(modalWindowProfile);
-  clearErrors(config, modalWindowProfile);
+  profileFormValidator.clearErrors(config, modalWindowProfile);
 });
 
 modalProfileCloseButton.addEventListener("click", function () {
@@ -130,7 +108,7 @@ modalProfileCloseButton.addEventListener("click", function () {
 
 addCardButton.addEventListener("click", function () {
   openPopup(modalWindowAddCard);
-  clearErrors(config, modalWindowAddCard);
+  cardFormValidator.clearErrors(config, modalWindowAddCard);
 });
 
 modalAddCardCloseButton.addEventListener("click", function () {
@@ -139,4 +117,13 @@ modalAddCardCloseButton.addEventListener("click", function () {
 
 formElementEditProfile.addEventListener("submit", submitFormProfile);
 
-render();
+
+function getCard(item) {
+  const card = new Card(item, '.template', openImageCard);
+  const cardElement = card.generateCard();
+  return cardElement
+}
+
+initialCards.forEach((item) => {
+  listCards.append(getCard(item));
+}); 
