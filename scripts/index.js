@@ -1,7 +1,8 @@
+import { config } from '../constants/constants.js';
 import { Card } from './Card.js'
 import { initialCards } from './dataCards.js';
 import { FormValidator } from './FormValidator.js';
-import { config } from '../utils.js';
+
 
 
 
@@ -11,8 +12,6 @@ const modalWindowAddCard = document.querySelector(".popup_add-Card");
 const formElementAddCard = modalWindowAddCard.querySelector('.popup__form');
 const popupFormSaveButton =
   modalWindowAddCard.querySelector(".popup__form-save");
-const modalAddCardCloseButton =
-  modalWindowAddCard.querySelector(".popup__close");
 const inputTitleAddCard = modalWindowAddCard.querySelector(
   ".popup__input_type_title"
 );
@@ -20,19 +19,17 @@ const inputLinkAddCard = modalWindowAddCard.querySelector(
   ".popup__input_type_link"
 );
 const modalWindowImage = document.querySelector(".popup_card");
-const modalImageCloseButton = modalWindowImage.querySelector(".popup__close");
 const popupImage = modalWindowImage.querySelector(".popup__image");
 const popupText = modalWindowImage.querySelector(".popup__text");
 const editButtonProfile = document.querySelector(".profile__edit-button");
 const modalWindowProfile = document.querySelector(".popup_edit-profile");
-const modalProfileCloseButton =
-  modalWindowProfile.querySelector(".popup__close");
 const addCardButton = document.querySelector(".profile__add-button");
 const formElementEditProfile = modalWindowProfile.querySelector(".popup__form");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 const nameImput = document.querySelector(".popup__input_type_name");
 const jobImput = document.querySelector(".popup__input_type_job");
+const closeButtons = document.querySelectorAll('.popup__close');
 const cardFormValidator = new FormValidator(config, formElementAddCard);
 const profileFormValidator = new FormValidator(config, formElementEditProfile);
 cardFormValidator.enableValidation();
@@ -41,15 +38,19 @@ profileFormValidator.enableValidation();
 function openPopup(popup) {
   popup.classList.add("popup_is-active");
   document.addEventListener('keydown', closeOnEsc);
-  document.addEventListener('click', closeClickOnOverlay);
+  document.addEventListener('mousedown', closeClickOnOverlay);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_is-active");
   document.removeEventListener('keydown', closeOnEsc);
-  document.removeEventListener('click', closeClickOnOverlay);
+  document.removeEventListener('mousedown', closeClickOnOverlay);
 }
 
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
 
 function openImageCard(item) {
   popupImage.src = item.link;
@@ -58,13 +59,11 @@ function openImageCard(item) {
   openPopup(modalWindowImage);
 };
 
-
 function handleAddCard(evt) {
   evt.preventDefault();
-  const newCard = new Card({ name: inputTitleAddCard.value, link: inputLinkAddCard.value }, '.template', openImageCard);
+  cardFormValidator.disabledButton();
+  listCards.prepend(getCard({ name: inputTitleAddCard.value, link: inputLinkAddCard.value }));
   formElementAddCard.reset();
-  cardFormValidator.disabledButton(popupFormSaveButton, config.disabledButtonClass);
-  listCards.prepend(newCard.generateCard());
   closePopup(modalWindowAddCard);
 }
 
@@ -88,9 +87,7 @@ function closeClickOnOverlay(event) {
   }
 };
 
-modalImageCloseButton.addEventListener("click", function () {
-  closePopup(modalWindowImage);
-});
+
 
 formElementAddCard.addEventListener("submit", handleAddCard);
 
@@ -99,21 +96,16 @@ editButtonProfile.addEventListener("click", function () {
   nameImput.value = profileTitle.textContent;
   jobImput.value = profileSubtitle.textContent;
   openPopup(modalWindowProfile);
-  profileFormValidator.clearErrors(config, modalWindowProfile);
+  profileFormValidator.clearErrors();
 });
 
-modalProfileCloseButton.addEventListener("click", function () {
-  closePopup(modalWindowProfile);
-});
 
 addCardButton.addEventListener("click", function () {
+  formElementAddCard.reset();
   openPopup(modalWindowAddCard);
-  cardFormValidator.clearErrors(config, modalWindowAddCard);
+  cardFormValidator.clearErrors();
 });
 
-modalAddCardCloseButton.addEventListener("click", function () {
-  closePopup(modalWindowAddCard);
-});
 
 formElementEditProfile.addEventListener("submit", submitFormProfile);
 

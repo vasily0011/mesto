@@ -7,33 +7,33 @@ export class Card {
   }
 
   _getTemplate() {
-    const CardElement = document.querySelector(this._template).content.querySelector('.element').cloneNode(true);
-    return CardElement;
+    const сardElement = document.querySelector(this._template).content.querySelector('.element').cloneNode(true);
+    return сardElement;
   }
 
   generateCard() {
     this._element = this._getTemplate();
-     this._setEventListeners();
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__image').alt = this._name;
+    this._setEventListeners();
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
     this._element.querySelector('.element__title').textContent = this._name;
     return this._element;
   }
 
   _handlePhotoClick = () => {
-    this._handlePhotoImage({name: this._name, link: this._link})
+    this._handlePhotoImage({ name: this._name, link: this._link })
   }
 
   _setEventListeners() {
-    const likeButton = this._element.querySelector(".element__button");
-    const removeButton = this._element.querySelector(".element__button_delete");
-    const elementImage = this._element.querySelector(".element__image");
-    likeButton.addEventListener('click', (event) => {
+    this._likeButton = this._element.querySelector(".element__button");
+    this._removeButton = this._element.querySelector(".element__button_delete");
+    this._cardImage = this._element.querySelector(".element__image");
+    this._likeButton.addEventListener('click', (event) => {
       event.target.classList.toggle("element__button_active");
     });
-    removeButton.addEventListener('click', (event) => {
+    this._removeButton.addEventListener('click', (event) => {
       this._element.remove();
     })
-    elementImage.addEventListener('click', this._handlePhotoClick);
+    this._cardImage.addEventListener('click', this._handlePhotoClick);
   }
 }
