@@ -7,7 +7,7 @@ import { FormValidator } from './FormValidator.js';
 
 
 const listCards = document.querySelector(".elements");
-const template = document.querySelector(".template");
+// const template = document.querySelector(".template");
 const modalWindowAddCard = document.querySelector(".popup_add-Card");
 const formElementAddCard = modalWindowAddCard.querySelector('.popup__form');
 const popupFormSaveButton =
@@ -61,7 +61,6 @@ function openImageCard(item) {
 
 function handleAddCard(evt) {
   evt.preventDefault();
-  cardFormValidator.disabledButton();
   listCards.prepend(getCard({ name: inputTitleAddCard.value, link: inputLinkAddCard.value }));
   formElementAddCard.reset();
   closePopup(modalWindowAddCard);
