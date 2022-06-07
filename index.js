@@ -68,12 +68,12 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
-function openImageCard(item) {
-  popupImage.src = item.link;
-  popupImage.alt = item.name;
-  popupText.textContent = item.name;
-  openPopup(modalWindowImage);
-}
+// function openImageCard(item) {
+//   popupImage.src = item.link;
+//   popupImage.alt = item.name;
+//   popupText.textContent = item.name;
+//   openPopup(modalWindowImage);
+// }
 
 function handleAddCard(evt) {
   evt.preventDefault();
