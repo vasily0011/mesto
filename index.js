@@ -19,7 +19,7 @@ const inputLinkAddCard = modalWindowAddCard.querySelector(
   ".popup__input_type_link"
 );
 const modalWindowImage = document.querySelector(".popup_card");
-const popupImage = modalWindowImage.querySelector(".popup__image");
+// const popupImage = modalWindowImage.querySelector(".popup__image");
 const popupText = modalWindowImage.querySelector(".popup__text");
 const editButtonProfile = document.querySelector(".profile__edit-button");
 const modalWindowProfile = document.querySelector(".popup_edit-profile");
@@ -48,8 +48,8 @@ const cardList = new Section(
 
 cardList.renderItems();
 
-// const popupImage = new popupWithImage('.popup__image');
-// popupImage.setEventListeners();
+const popupImage = new popupWithImage('.popup_card');
+popupImage.setEventListeners();
 
 function openPopup(popup) {
   popup.classList.add("popup_is-active");
@@ -122,8 +122,8 @@ addCardButton.addEventListener("click", function () {
 formElementEditProfile.addEventListener("submit", submitFormProfile);
 
 function getCard(item) {
-  // const card = new Card(item, ".template", () => {popupImage.open(item)});
-  const card = new Card(item, ".template", handlePhotoImage);
+  const card = new Card(item, ".template", () => {popupImage.open(item)});
+  // const card = new Card(item, ".template", handlePhotoImage);
   const cardElement = card.generateCard();
   return cardElement;
 }

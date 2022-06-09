@@ -7,7 +7,7 @@ import { popupWithImage } from '../components/PopupWithImage.js';
 
 
 
-const listCards = document.querySelector(".elements");
+// const listCards = document.querySelector(".elements");
 const modalWindowAddCard = document.querySelector(".popup_add-Card");
 const formElementAddCard = modalWindowAddCard.querySelector('.popup__form');
 const popupFormSaveButton =
@@ -48,8 +48,7 @@ const cardList = new Section(
 
 cardList.renderItems();
 
-const popupImage = new popupWithImage('.popup__image');
-popupImage.setEventListeners();
+const popupImage = new popupWithImage('.popup_card');
 
 // function openPopup(popup) {
 //   popup.classList.add("popup_is-active");
@@ -104,32 +103,31 @@ popupImage.setEventListeners();
 
 
 
-formElementAddCard.addEventListener("submit", handleAddCard);
+// formElementAddCard.addEventListener("submit", handleAddCard);
 
 
-editButtonProfile.addEventListener("click", function () {
-  nameImput.value = profileTitle.textContent;
-  jobImput.value = profileSubtitle.textContent;
-  openPopup(modalWindowProfile);
-  profileFormValidator.clearErrors();
-});
+// editButtonProfile.addEventListener("click", function () {
+//   nameImput.value = profileTitle.textContent;
+//   jobImput.value = profileSubtitle.textContent;
+//   openPopup(modalWindowProfile);
+//   profileFormValidator.clearErrors();
+// });
 
 
-addCardButton.addEventListener("click", function () {
-  formElementAddCard.reset();
-  openPopup(modalWindowAddCard);
-  cardFormValidator.clearErrors();
-});
+// addCardButton.addEventListener("click", function () {
+//   formElementAddCard.reset();
+//   openPopup(modalWindowAddCard);
+//   cardFormValidator.clearErrors();
+// });
 
 
-formElementEditProfile.addEventListener("submit", submitFormProfile);
+// formElementEditProfile.addEventListener("submit", submitFormProfile);
 
 
 function getCard(item) {
-  // const card = new Card(item, '.template', openImageCard);
-  const card = new Card(item, '.template', () => 
-    {popupImage.open(item)}
-  );
+  const card = new Card(item, '.template', () => {(popupImage.open(item))});
   const cardElement = card.generateCard();
   return cardElement
 }
+
+popupImage.setEventListeners();

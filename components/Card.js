@@ -20,9 +20,9 @@ export class Card {
     return this._element;
   }
 
-  // handlePhotoClick = () => {
-  //   this._handleCardClick({ name: this._name, link: this._link })
-  // }
+  handlePhotoClick = () => {
+    this._handleCardClick({ name: this._name, link: this._link })
+  }
 
   _setEventListeners() {
     this._likeButton = this._element.querySelector(".element__button");
