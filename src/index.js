@@ -1,11 +1,12 @@
-import { config } from '../constants/constants.js';
-import { Card } from '../components/Card.js';
-import { initialCards } from '../components/dataCards.js';
-import { FormValidator } from '../components/FormValidator.js';
-import { Section } from '../components/Section.js';
-import { popupWithImage } from '../components/PopupWithImage.js';
-import { popupWithForm } from '../components/PopupWithForm.js';
-import { UserInfo } from '../components/UserInfo.js';
+import './pages/index.css';
+import { config } from './constants/constants.js';
+import { Card } from './components/Card.js';
+import { initialCards } from './components/dataCards.js';
+import { FormValidator } from './components/FormValidator.js';
+import { Section } from './components/Section.js';
+import { popupWithImage } from './components/PopupWithImage.js';
+import { popupWithForm } from './components/PopupWithForm.js';
+import { UserInfo } from './components/UserInfo.js';
 
 
 
