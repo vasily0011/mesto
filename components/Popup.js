@@ -19,12 +19,13 @@ export class popup {
         }
     }
 
-    _closeOnClick(event) {
-        if (event.target.classList.contains('popup_is-active') || event.target.classList.contains('popup__close'));
-        this.close();
+    _closeOnClick = (event) => {
+        if (event.target.classList.contains('popup_is-active') || event.target.classList.contains('popup__close')) {
+            this.close();
+        }
     }
 
-    setEventListeners() {
+    setEventListeners(event) {
         this._popupSelector.addEventListener('mousedown', (event) => {
             this._closeOnClick(event);
         })
