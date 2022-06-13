@@ -1,12 +1,12 @@
-import './pages/index.css';
-import { config } from './constants/constants.js';
-import { Card } from './components/Card.js';
-import { initialCards } from './components/dataCards.js';
-import { FormValidator } from './components/FormValidator.js';
-import { Section } from './components/Section.js';
-import { popupWithImage } from './components/PopupWithImage.js';
-import { popupWithForm } from './components/PopupWithForm.js';
-import { UserInfo } from './components/UserInfo.js';
+import './index.css';
+import { config } from '../constants/constants.js';
+import { Card } from '../components/Card.js';
+import { initialCards } from '../constants/dataCards.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Section } from '../components/Section.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { UserInfo } from '../components/UserInfo.js';
 
 
 
@@ -59,17 +59,17 @@ function getCard(item) {
 
 const userInfo = new UserInfo(".profile__title", ".profile__subtitle")
 
-const popupImage = new popupWithImage('.popup_card');
-const popupEditProfile = new popupWithForm('.popup_edit-profile', {
+const popupImage = new PopupWithImage('.popup_card');
+const popupEditProfile = new PopupWithForm('.popup_edit-profile', {
   submitForm: (item) => {
     userInfo.setUserInfo(item);
     popupEditProfile.close();
   }
 })
 
-const popupAddCard = new popupWithForm('.popup_add-Card', {
+const popupAddCard = new PopupWithForm('.popup_add-Card', {
   submitForm: (item) => {
-    cardList.addItem(getCard({ name: inputTitleAddCard.value, link: inputLinkAddCard.value }));
+    cardList.addItem(getCard({name: item['popup__input_title'], link: item['popup__link']}));
     popupAddCard.close();
   }
 })
@@ -80,9 +80,9 @@ addCardButton.addEventListener('click', () => {
 })
 
 editButtonProfile.addEventListener("click", () => {
-  const UserData = userInfo.getUserInfo();
-  nameImput.value = UserData.name;
-  jobImput.value = UserData.job;
+  const userData = userInfo.getUserInfo();
+  nameImput.value = userData.name;
+  jobImput.value = userData.job;
   popupEditProfile.open();
   profileFormValidator.clearErrors();
 });

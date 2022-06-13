@@ -1,10 +1,10 @@
-import { popup } from "./Popup.js";
+import { Popup } from "./Popup.js";
 
-export class popupWithForm extends popup {
+export class PopupWithForm extends Popup {
     constructor(popupSelector, { submitForm }) {
         super(popupSelector);
         this._submitForm = submitForm;
-        this._popupForm = this._popupSelector.querySelector('.popup__form');
+        this._popupForm = this._popup.querySelector('.popup__form');
         this._inputList = Array.from(this._popupForm.querySelectorAll('.popup__input'));
     }
 
