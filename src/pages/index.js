@@ -42,23 +42,26 @@ let userId = null;
 
 const api = new Api('https://mesto.nomoreparties.co/v1/cohort-45');
 
-const cardList = new Section(
-  {
-    renderer: (item) => {
-      const card = getCard(item);
-      cardList.addItem(card);
-    },
-  },
-  ".elements"
-);
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      job: userData.about,
+      avatar: userData.avatar
+    });
+    userId = userData._id
 
-// cardList.renderItems();
+    cardList.renderItems(cards);
+  })
+  .catch(err => {console.log(err)});
+
 
 function getCard (data) {
   const card = new Card(data, '.template', () => { (popupImage.open(data)) }, userId);
   const cardElement = card.generateCard();
   return cardElement
 }
+
 
 const userInfo = new UserInfo(".profile__title", ".profile__subtitle", ".profile__img")
 
@@ -90,18 +93,17 @@ editButtonProfile.addEventListener("click", () => {
   profileFormValidator.clearErrors();
 });
 
-Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(([userData, cards]) => {
-    userInfo.setUserInfo({
-      name: userData.name,
-      job: userData.about,
-      avatar: userData.avatar
-    });
-    userId = userData._id
 
-    cardList.renderItems(cards);
-  })
-  .catch(err => {console.log(err)});
+
+  const cardList = new Section(
+    {
+      renderer: (item) => {
+        const card = getCard(item);
+        cardList.addItem(card);
+      },
+    },
+    ".elements"
+  );
 
 
 popupImage.setEventListeners();

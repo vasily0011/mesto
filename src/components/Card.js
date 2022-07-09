@@ -4,9 +4,9 @@ export class Card {
     this._link = item.link;
     this._template = template;
     this._userId = userId;
-    this._ownerId = data.owner._id;
-    this._cardId = data._id;
-    this._likes = data.likes;
+    // this._ownerId = data.owner._id;
+    // this._cardId = data._id;
+    // this._likes = data.likes;
     this._handleCardClick = handleCardClick;
     
   }
