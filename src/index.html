@@ -17,7 +17,12 @@
   </header>
   <main class="main">
     <section class="profile">
-      <img src="<%=require('./images/Avatar.png')%>" alt="Жак-Ив Кусто" class="profile__avatar" />
+        <div class="profile__avatar">
+          <img src="<%=require('./images/Avatar.png')%>" alt="Жак-Ив Кусто" class="profile__img" />
+          <div class="profile__overlay"></div>
+        </div>
+        
+        
       <div class="profile__info">
         <h1 class="profile__title">Жак-Ив Кусто</h1>
         <button aria-label="Редактировать" class="profile__edit-button" type="button"></button>
@@ -67,7 +72,7 @@
         <button class="popup__form-save" type="submit">Сохранить</button>
       </form>
     </div>
-  </div>
+  </div> -->
   <div class="popup popup_add-Card">
     <div class="popup__container">
       <button aria-label="Закрыть" class="popup__close" type="button"></button>
@@ -110,7 +115,36 @@
         <figcaption class="popup__text"></figcaption>
       </figure>
     </div>
-    
+  </div>
+   <div class="popup popup_remove-card">
+    <div class="popup__container">
+      <button aria-label="Закрыть" class="popup__close" type="button"></button>
+      <form name="form_remove_card" class="popup__form popup__form_remove-card" novalidate>
+        <h3 class="popup__title">Вы уверены?</h3>
+        <button class="popup__form-save" type="submit">Да</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_edit-avatar">
+    <div class="popup__container">
+      <button aria-label="Закрыть" class="popup__close" type="button"></button>
+      <form name="form_edit_avatar" class="popup__form popup__form_edit-avatar" novalidate>
+        <h3 class="popup__title">Обновить аватар</h3>
+        <div class = "popup__field">
+        <input 
+        type="url" 
+        id="avatar-input"
+        name="popup__input_avatar" 
+        required 
+        minlength="2"
+        maxlength="40"
+        class="popup__input popup__input_type_name" 
+        placeholder="" 
+        >
+        </div>
+        <button class="popup__form-save" type="submit">Сохранить</button>
+      </form>
+    </div>
   </div>
   <template class="template">
     <li class="element">

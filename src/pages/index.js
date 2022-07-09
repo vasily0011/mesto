@@ -7,6 +7,7 @@ import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
+import { Api } from '../components/Api.js';
 
 
 
@@ -37,10 +38,12 @@ const cardFormValidator = new FormValidator(config, formElementAddCard);
 const profileFormValidator = new FormValidator(config, formElementEditProfile);
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
+let userId = null;
+
+const api = new Api('https://mesto.nomoreparties.co/v1/cohort-45');
 
 const cardList = new Section(
   {
-    items: initialCards,
     renderer: (item) => {
       const card = getCard(item);
       cardList.addItem(card);
@@ -49,15 +52,15 @@ const cardList = new Section(
   ".elements"
 );
 
-cardList.renderItems();
+// cardList.renderItems();
 
-function getCard(item) {
-  const card = new Card(item, '.template', () => { (popupImage.open(item)) });
+function getCard (data) {
+  const card = new Card(data, '.template', () => { (popupImage.open(data)) }, userId);
   const cardElement = card.generateCard();
   return cardElement
 }
 
-const userInfo = new UserInfo(".profile__title", ".profile__subtitle")
+const userInfo = new UserInfo(".profile__title", ".profile__subtitle", ".profile__img")
 
 const popupImage = new PopupWithImage('.popup_card');
 const popupEditProfile = new PopupWithForm('.popup_edit-profile', {
@@ -87,78 +90,22 @@ editButtonProfile.addEventListener("click", () => {
   profileFormValidator.clearErrors();
 });
 
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      job: userData.about,
+      avatar: userData.avatar
+    });
+    userId = userData._id
+
+    cardList.renderItems(cards);
+  })
+  .catch(err => {console.log(err)});
+
 
 popupImage.setEventListeners();
 popupEditProfile.setEventListeners();
 popupAddCard.setEventListeners();
-
-// function openPopup(popup) {
-//   popup.classList.add("popup_is-active");
-//   document.addEventListener('keydown', closeOnEsc);
-//   document.addEventListener('mousedown', closeClickOnOverlay);
-// }
-
-// function closePopup(popup) {
-//   popup.classList.remove("popup_is-active");
-//   document.removeEventListener('keydown', closeOnEsc);
-//   document.removeEventListener('mousedown', closeClickOnOverlay);
-// }
-
-// closeButtons.forEach((button) => {
-//   const popup = button.closest('.popup');
-//   button.addEventListener('click', () => closePopup(popup));
-// });
-
-// function openImageCard(item) {
-//   popupImage.src = item.link;
-//   popupImage.alt = item.name;
-//   popupText.textContent = item.name;
-//   openPopup(modalWindowImage);
-// };
-
-// function handleAddCard(evt) {
-//   evt.preventDefault();
-//   listCards.prepend(getCard({ name: inputTitleAddCard.value, link: inputLinkAddCard.value }));
-//   formElementAddCard.reset();
-//   closePopup(modalWindowAddCard);
-// }
-
-// function submitFormProfile(evt) {
-//   evt.preventDefault();
-//   profileTitle.textContent = nameImput.value;
-//   profileSubtitle.textContent = jobImput.value;
-//   closePopup(modalWindowProfile);
-// }
-
-// function closeOnEsc(event) {
-//   if (event.key === "Escape") {
-//     const popupIsActive = document.querySelector(".popup_is-active");
-//     closePopup(popupIsActive);
-//   }
-// }
-
-// function closeClickOnOverlay(event) {
-//   if (event.target.classList.contains('popup_is-active')) {
-//     closePopup(event.target);
-//   }
-// };
-
-
-
-// formElementAddCard.addEventListener("submit", handleAddCard);
-
-
-
-
-// addCardButton.addEventListener("click", function () {
-//   formElementAddCard.reset();
-//   openPopup(modalWindowAddCard);
-//   cardFormValidator.clearErrors();
-// });
-
-
-// formElementEditProfile.addEventListener("submit", submitFormProfile);
-
-
 
 

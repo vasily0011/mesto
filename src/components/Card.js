@@ -1,9 +1,14 @@
 export class Card {
-  constructor(item, template, handleCardClick) {
+  constructor(item, template, handleCardClick, userId) {
     this._name = item.name;
     this._link = item.link;
     this._template = template;
+    this._userId = userId;
+    this._ownerId = data.owner._id;
+    this._cardId = data._id;
+    this._likes = data.likes;
     this._handleCardClick = handleCardClick;
+    
   }
 
   _getTemplate() {
@@ -20,9 +25,6 @@ export class Card {
     return this._element;
   }
 
-  // handlePhotoClick = () => {
-  //   this._handleCardClick({ name: this._name, link: this._link })
-  // }
 
   _setEventListeners() {
     this._likeButton = this._element.querySelector(".element__button");
