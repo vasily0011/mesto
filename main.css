@@ -17,6 +17,8 @@
 .element__button{background-color:#fff;background-image:url(bf45e82757b0b9e50dfb.svg);background-position:50%;border:none;cursor:pointer;flex-shrink:0;height:19px;margin-right:20px;padding:0;width:22px}.element__button:hover{opacity:50%}
 .element__button_delete{background-color:unset;background-image:url(cbc09a894bdd4c956365.svg);border:none;cursor:pointer;height:19px;margin:20px 20px 0 244px;padding:0;position:absolute;width:18px}.element__button_delete:hover{opacity:60%}
 .element__button_active{background-image:url(fe17a515669479b1e649.svg)}
+.element__like{align-content:flex-start;align-items:center;display:flex;flex-direction:column;gap:3px}
+.element__like_counter{font-family:Inter;font-size:13px;font-style:normal;font-weight:400;line-height:1.23;margin-right:20px;padding:0}
 .element__item{align-items:center;background-color:#fff;border-bottom-left-radius:10px;border-bottom-right-radius:10px;display:flex;justify-content:space-between;max-width:282px;padding:25px 0;width:100%}
 .element__image{border-top-left-radius:10px;border-top-right-radius:10px;cursor:pointer;height:282px;max-width:282px;-o-object-fit:cover;object-fit:cover;width:100%}
 .element__title{font-family:Inter,Arial,sans-serif;font-size:24px;font-style:normal;font-weight:900;line-height:121%;margin:0 0 0 21px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
