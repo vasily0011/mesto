@@ -6,13 +6,10 @@ export class Section {
   }
 
   addItem(element) {
-    console.dir(this);
     this._container.prepend(element);
   }
 
   renderItems(data) {
-    console.dir(this);
-    console.dir(data);
     data.forEach(item => {
       this._renderer(item)
     });

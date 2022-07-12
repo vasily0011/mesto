@@ -31,13 +31,35 @@ export class Api {
       .then(this._checkResponse);
   } 
 
-  setUserInfo(item) {
+  setUserInfo(data) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: item.name,
-        about: item.job
+        name: data.popup__input_name,
+        about: data.popup__input_job
+      })
+    })
+    .then(this._checkResponse);
+  }
+
+  editUserAvatar(data) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.popup__input_avatar
+      }),
+    }).then(this._checkResponse);
+  }
+
+  addNewCard(data) {
+    return fetch(`${this._url}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.popup__input_title,
+        link: data.popup__link
       })
     })
     .then(this._checkResponse);
