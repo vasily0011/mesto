@@ -35,6 +35,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userInfo.setUserInfo({
       name: userData.name,
       job: userData.about,
+    });
+    userInfo.setUserAvatar({
+      
       avatar: userData.avatar,
     });
     userId = userData._id;
