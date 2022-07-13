@@ -19,6 +19,9 @@ export class UserInfo {
   setUserInfo(data) {
     this._profileTitleSelector.textContent = data.name;
     this._profileSubtitleSelector.textContent = data.job;
+  }
+
+  setUserAvatar(data) {
     this._avatarSelector.src = data.avatar;
   }
 
